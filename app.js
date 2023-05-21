@@ -10,7 +10,7 @@ const cors = require('cors');
 const routes = require('./routes/teachers');
 
 app.get('/', (req, res) => {
-    res.send('Welcome!!!')
+    res.send('<h1>Welcome to my project! My name is Richard Omachona</h1>');
 })
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
