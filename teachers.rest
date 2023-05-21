@@ -1,0 +1,40 @@
+### Get all teacher info
+GET http://localhost:3000/teachers HTTP/1.1 
+
+### Get one teacher info
+GET http://localhost:3000/teachers/64696ee27c4b1de6a338ef31 HTTP/1.1 
+
+### Add a teacher 
+POST http://localhost:3000/teachers HTTP/1.1 
+content-type: application/json
+
+{
+    "firstName": "Nagdalene",
+    "lastName": "Omoijiehahor",
+    "gender": "Female",
+    "email": "maggy@test.com",
+    "phone": "090879376765",
+    "birthDate": "1993-05-02",
+    "employmentDate": "2020-07-09",
+    "hobbies": "Fashion",
+    "comment": "Caught the world by storm"
+}
+
+### Update Teacher info
+PUT http://localhost:3000/teachers/64696ee27c4b1de6a338ef31 HTTP/1.1 
+content-type: application/json
+
+{
+    "firstName": "Magdalene",
+    "lastName": "Jackson",
+    "gender": "Female",
+    "email": "maggy@test.com",
+    "phone": "090879376765",
+    "birthDate": "1993-05-02",
+    "employmentDate": "2020-07-09",
+    "hobbies": "Fashion",
+    "comment": "Caught the world by storm"
+}
+
+### Delete teacher info
+Delete http://localhost:3000/teachers/64696a0a2140e8384c5a531b HTTP/1.1
