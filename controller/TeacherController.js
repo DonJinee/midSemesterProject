@@ -1,6 +1,9 @@
-const Teacher = require('../models/teachers')
+const Teacher = require('../models/teachers');
+const errorHandler = require('http-errors');
+const mongoose = require('mongoose');
+const authSchema = require('../models/Validation');
 
-const getAllTeachers = async(req, res) => {
+const getAllTeachers = async(req, res, next) => {
     try{
         const teachers = await Teacher.find();
         res.status(200).json(teachers)
@@ -9,38 +12,42 @@ const getAllTeachers = async(req, res) => {
     }
 };
 
-const getOneTeacher = async(req, res) => {
+const getOneTeacher = async(req, res, next) => {
     try{
         const contact = await Teacher.findById(req.params.id);
+        if(!contact){
+            throw errorHandler(404, "Teacher does not exist");
+        }
         res.status(200).json(contact);
     }catch(err){
-        res.status(500).json({message: err});
+        if(err instanceof mongoose.CastError){
+            next(errorHandler(400, "Invalid teacher id"));
+            return;
+        }
+        next(err);
     }
 };
 
-const addNewTeachers = async(req, res) => {
-    const teacher = new Teacher ({
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        gender: req.body.gender,
-        email: req.body.email,
-        phone: req.body.phone,
-        birthDate: req.body.birthDate,
-        employmentDate: req.body.employmentDate,
-        hobbies: req.body.hobbies,
-        comment: req.body.comment
-    });
+const addNewTeachers = async(req, res, next) => {
+    
         try {
-        const savedTeacher = await teacher.save();
-        res.status(201).json(savedTeacher);
+            const teacherInfo =  await authSchema.validateAsync(req.body, {abortEarly:false});
+            const teacher = new Teacher(teacherInfo)
+            const savedTeacher = await teacher.save();
+            res.status(201).json(savedTeacher);
     }catch(err){
-        res.status(500).json(err)
+        console.log(err);
+        if(err.name === 'ValidationError'){
+            next(errorHandler(422, err.message));
+            return;
+        }
+        next(err);
     }
 };
 
-const updateTeacherInfo = async (req, res) => {
+const updateTeacherInfo = async (req, res, next) => {
     try{
-        const updatedTeacher = await Teacher.updateOne(
+        const updatedTeacher = await Teacher.findByIdAndUpdate(
             {_id: req.params.id},
             {$set: {
                 firstName: req.body.firstName,
@@ -54,18 +61,34 @@ const updateTeacherInfo = async (req, res) => {
                 comment: req.body.comment
             }}
         );
+        if (!updatedTeacher) {
+            throw errorHandler(404, "Teacher does not exist");
+        }
         res.status(204).json(updatedTeacher)
     }catch(err) {
-        res.status(500).json({message: err} || 'Update Error!!!');
+        console.log(err.mesage);
+        if (err instanceof mongoose.CastError) {
+            return next(errorHandler(400, 'Invalid teacher ID'))
+        }
+
+        next(err)
     }
 };
 
-const deleteTeacher = async(req, res) => {
+const deleteTeacher = async(req, res, next) => {
     try{
-        const deletedTeacher = await Teacher.deleteOne({_id: req.params.id});
-        res.status(204).json(deletedTeacher)
+        const deletedTeacher = await Teacher.findByIdAndDelete({_id: req.params.id});
+        if(!deletedTeacher){
+            throw errorHandler(404, "Teacher does not exist");
+        }
+        console.log(deletedTeacher);
+        res.send(deletedTeacher);
     }catch(err){
-        res.status(500).json({message: err})
+        if(err instanceof mongoose.CastError){
+            next(errorHandler(400, "Invalid teacher id"));
+            return;
+        }
+        next(err);
     }
 };
 

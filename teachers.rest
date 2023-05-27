@@ -9,9 +9,9 @@ POST http://localhost:3000/teachers HTTP/1.1
 content-type: application/json
 
 {
-    "firstName": "Nagdalene",
-    "lastName": "Omoijiehahor",
-    "gender": "Female",
+    "firstName": "magdalene",
+    "lastName": "jackson",
+    "gender": "F",
     "email": "maggy@test.com",
     "phone": "090879376765",
     "birthDate": "1993-05-02",
@@ -21,7 +21,7 @@ content-type: application/json
 }
 
 ### Update Teacher info
-PUT http://localhost:3000/teachers/64696ee27c4b1de6a338ef31 HTTP/1.1 
+PUT http://localhost:3000/teachers/64696bad99d268d8354fb4a8 HTTP/1.1 
 content-type: application/json
 
 {
@@ -37,4 +37,46 @@ content-type: application/json
 }
 
 ### Delete teacher info
-Delete http://localhost:3000/teachers/64696a0a2140e8384c5a531b HTTP/1.1
+Delete http://localhost:3000/teachers/64696bad99d268d8354fb4a8 HTTP/1.1
+
+
+### Get all teachers RENDER
+GET https://mid-semester-project.onrender.com/teachers HTTP/1.1
+
+### Get one teacher RENDER
+GET https://mid-semester-project.onrender.com/teachers/64696bad99d268d8354fb4a8 HTTP/1.1
+
+### Add new teachers RENDER
+POST https://mid-semester-project.onrender.com/teachers HTTP/1.1
+content-type: application/json
+
+{
+    "firstName": "Jane",
+    "lastName": "Forster",
+    "gender": "Female",
+    "email": "jane@test.com",
+    "phone": "+1 879376765",
+    "birthDate": "1970-10-16",
+    "employmentDate": "2010-03-07",
+    "hobbies": "Singing",
+    "comment": "Heal the world"
+}
+
+### Add new teachers RENDER
+PUT https://mid-semester-project.onrender.com/teachers/6469816bc84941bba004c40b HTTP/1.1
+content-type: application/json
+
+{
+    "firstName": "Daniel",
+    "lastName": "Samuel",
+    "gender": "Male",
+    "email": "dannyd@test.com",
+    "phone": "090879376765",
+    "birthDate": "1980-10-16",
+    "employmentDate": "2010-03-07",
+    "hobbies": "Painting and traveling",
+    "comment": "Color the world"
+}
+
+### Delete a teacher RENDER
+DELETE https://mid-semester-project.onrender.com/teachers/6469816bc84941bba004c40b HTTP/1.1
