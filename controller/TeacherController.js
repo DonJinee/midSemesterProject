@@ -31,7 +31,17 @@ const getOneTeacher = async(req, res, next) => {
 const addNewTeachers = async(req, res, next) => {
     
         try {
-            const teacherInfo =  await authSchema.validateAsync(req.body, {abortEarly:false});
+            const teacherInfo =  await authSchema.validateAsync({
+                firstName: req.body.firstName,
+                lastName: req.body.lastName,
+                gender: req.body.gender,
+                email: req.body.email,
+                phone: req.body.phone,
+                birthDate: req.body.birthDate,
+                employmentDate: req.body.employmentDate,
+                hobbies: req.body.hobbies,
+                comment: req.body.comment
+            }, {abortEarly:false});
             const teacher = new Teacher(teacherInfo)
             const savedTeacher = await teacher.save();
             res.status(201).json(savedTeacher);
