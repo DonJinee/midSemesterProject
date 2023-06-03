@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
-const db1 = require('../db/connect');
 
-const teachersSchema = db1.model("teachers", mongoose.Schema({
+const teachersSchema = mongoose.Schema({
     firstName: {
         type: String,
         required: true
@@ -31,6 +30,8 @@ const teachersSchema = db1.model("teachers", mongoose.Schema({
     comment: {
         type: String
     }
-}));
+});
 
-module.exports = teachersSchema;
+const Teacher = mongoose.model("teachers", teachersSchema)
+
+module.exports = Teacher;
