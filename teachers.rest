@@ -1,23 +1,32 @@
 ### Get all teacher info
-GET http://localhost:3000/teachers HTTP/1.1 
+GET http://localhost:3000/teachers HTTP/1.1
+
+### Login
+GET http://localhost:3000/auth/login HTTP/1.1
+
+### Logout
+GET http://localhost:3000/auth/logout HTTP/1.1
+
+### Google auth
+GET http://localhost:3000/auth/google HTTP/1.1
 
 ### Get one teacher info
 GET http://localhost:3000/teachers/64696ee27c4b1de6a338ef31 HTTP/1.1 
 
 ### Add a teacher 
-POST http://localhost:3000/teachers HTTP/1.1 
+POST http://localhost:3000/teachers HTTP/1.1
 content-type: application/json
 
 {
-    "firstName": "magdalene",
-    "lastName": "jackson",
-    "gender": "F",
-    "email": "maggy@test.com",
+    "firstName": "daniel",
+    "lastName": "akintunde",
+    "gender": "m",
+    "email": "akindee@test.com",
     "phone": "090879376765",
-    "birthDate": "1993-05-02",
-    "employmentDate": "2020-07-09",
-    "hobbies": "Fashion",
-    "comment": "Caught the world by storm"
+    "birthDate": "1991-05-02",
+    "employmentDate": "2019-07-09",
+    "hobbies": "Gym",
+    "comment": "Strong men run the world"
 }
 
 ### Update Teacher info
@@ -44,22 +53,22 @@ Delete http://localhost:3000/teachers/64696bad99d268d8354fb4a8 HTTP/1.1
 GET https://mid-semester-project.onrender.com/teachers HTTP/1.1
 
 ### Get one teacher RENDER
-GET https://mid-semester-project.onrender.com/teachers/64696bad99d268d8354fb4a8 HTTP/1.1
+GET https://mid-semester-project.onrender.com/teachers/646983fec84941bba004c410 HTTP/1.1
 
 ### Add new teachers RENDER
 POST https://mid-semester-project.onrender.com/teachers HTTP/1.1
 content-type: application/json
 
 {
-    "firstName": "Jane",
-    "lastName": "Forster",
-    "gender": "Female",
-    "email": "jane@test.com",
+    "firstName": "JAckson",
+    "lastName": "Ben",
+    "gender": "M",
+    "email": "jackben@test.com",
     "phone": "+1 879376765",
-    "birthDate": "1970-10-16",
-    "employmentDate": "2010-03-07",
-    "hobbies": "Singing",
-    "comment": "Heal the world"
+    "birthDate": "1908-10-26",
+    "employmentDate": "2000-03-07",
+    "hobbies": "Going to the beach",
+    "comment": "Live Love Learn"
 }
 
 ### Add new teachers RENDER
